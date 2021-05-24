@@ -20,7 +20,8 @@ public class RandomWalk {
      * @param dy the distance he moves in the y direction
      */
     private void move(int dx, int dy) {
-        // TO BE IMPLEMENTED
+        x = x+dx;
+        y = y+dy;
     }
 
     /**
@@ -29,7 +30,8 @@ public class RandomWalk {
      * @param m the number of steps the drunkard takes
      */
     private void randomWalk(int m) {
-        // TO BE IMPLEMENTED
+        for(int j=0;j<m;j++)
+            randomMove();
     }
 
     /**
@@ -48,8 +50,8 @@ public class RandomWalk {
      * @return the (Euclidean) distance from the origin to the current position.
      */
     public double distance() {
-        // TO BE IMPLEMENTED
-        throw new UnsupportedOperationException("Not implemented yet");
+        double distance= Math.pow(x,2)+Math.pow(y,2);
+        return Math.sqrt(distance);
     }
 
     /**
