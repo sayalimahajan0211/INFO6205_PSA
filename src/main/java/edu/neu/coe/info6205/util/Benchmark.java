@@ -1,5 +1,12 @@
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.GenericSort;
+import edu.neu.coe.info6205.sort.simple.InsertionSort;
+import org.ini4j.Ini;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.function.Supplier;
 
 /**
@@ -27,4 +34,73 @@ public interface Benchmark<T> {
      * @return the average number of milliseconds taken for each run of function f.
      */
     double runFromSupplier(Supplier<T> supplier, int m);
+
+    public static void main(String[] args) {
+
+        double result = 0;
+        for (int i =100; i <= 3200; i=i*2) {
+            Random random = new Random();
+            List<Integer> random_list = new ArrayList<Integer>();
+            for (int j = 0; j < i; j++) {
+                random_list.add(random.nextInt(i));
+            }
+            InsertionSort insertionSort = new InsertionSort(new Config(new Ini()));
+            Benchmark<Integer> benchmark = new Benchmark_Timer<>("",
+                    blank -> {
+                        insertionSort.sort(random_list);
+                    });
+            result = benchmark.run(0, 10);
+            System.out.println("Random Array: Insertion sort with "+i+" elements takes "+result+" ms");
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+        for (int i =100; i <= 3200; i=i*2) {
+            Random random = new Random();
+            List<Integer> ordered_list = new ArrayList<Integer>();
+            for (int j = 0; j < i; j++) {
+                ordered_list.add(i);
+            }
+            InsertionSort insertionSort = new InsertionSort(new Config(new Ini()));
+            Benchmark<Integer> benchmark = new Benchmark_Timer<>("",
+                    blank -> {
+                        insertionSort.sort(ordered_list);
+                    });
+            result = benchmark.run(0, 10);
+            System.out.println("Ordered Array: Insertion sort with "+i+" elements takes "+result+" ms");
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+        for (int i =100; i <= 3200; i=i*2) {
+            Random random = new Random();
+            List<Integer> partiallyOrdered_list = new ArrayList<Integer>();
+            for (int j = 0; j < i; j++) {
+                if (random.nextInt(50) < 30) {
+                    partiallyOrdered_list.add(j);
+                } else {
+                    partiallyOrdered_list.add((random.nextInt(i)));
+                }
+            }
+            InsertionSort insertionSort = new InsertionSort(new Config(new Ini()));
+            Benchmark<Integer> benchmark = new Benchmark_Timer<>("",
+                    blank -> {
+                        insertionSort.sort(partiallyOrdered_list);
+                    });
+            result = benchmark.run(0, 10);
+            System.out.println("Partially Ordered Array: Insertion sort with "+i+" elements takes "+result+" ms");
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+        for (int i =100; i <= 3200; i=i*2) {
+            Random random = new Random();
+            List<Integer> reverseOrdered_list = new ArrayList<Integer>();
+            for (int j = 0; j < i; j++) {
+                reverseOrdered_list.add(i - j);
+            }
+            InsertionSort insertionSort = new InsertionSort(new Config(new Ini()));
+            Benchmark<Integer> benchmark = new Benchmark_Timer<>("",
+                    blank -> {
+                        insertionSort.sort(reverseOrdered_list);
+                    });
+            result = benchmark.run(0, 10);
+            System.out.println("Reverse Ordered Array: Insertion sort with "+i+" elements takes "+result+" ms");
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+    }
 }
