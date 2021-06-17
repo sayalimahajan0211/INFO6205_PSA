@@ -128,7 +128,7 @@ public class ThreeSumTest {
         int[] ints = intsSupplier.get();
 //        System.out.println("ints: "+Arrays.toString(ints));
 //        System.out.println("length of ints: "+ints.length);
-        ThreeSum target = new ThreeSumQuadraticWithCalipers(ints);
+        ThreeSum target = new ThreeSumQuadratic(ints);
         Triple[] triples = target.getTriples();
 //        assertEquals(4, triples.length);
         System.out.println(Arrays.toString(triples));
@@ -144,7 +144,7 @@ public class ThreeSumTest {
     public void testGetTriplesC2() {
         Supplier<int[]> intsSupplier = new Source(10, 15, 3L).intsSupplier(10);
         int[] ints = intsSupplier.get();
-        ThreeSum target = new ThreeSumQuadraticWithCalipers(ints);
+        ThreeSum target = new ThreeSumQuadratic(ints);
         System.out.println(Arrays.toString(ints));
         Triple[] triples = target.getTriples();
         System.out.println(Arrays.toString(triples));
@@ -158,7 +158,7 @@ public class ThreeSumTest {
         Supplier<int[]> intsSupplier = new Source(1000, 1000).intsSupplier(10);
         int[] ints = intsSupplier.get();
 //        System.out.println("ints: "+Arrays.toString(ints));
-        ThreeSum target = new ThreeSumQuadraticWithCalipers(ints);
+        ThreeSum target = new ThreeSumQuadratic(ints);
         Triple[] triplesQuadratic = target.getTriples();
 //        System.out.println("triplesQuadratic:   "+Arrays.toString(triplesQuadratic));
         Triple[] triplesCubic = new ThreeSumCubic(ints).getTriples();
@@ -176,7 +176,7 @@ public class ThreeSumTest {
         Supplier<int[]> intsSupplier = new Source(1500, 1000).intsSupplier(10);
         int[] ints = intsSupplier.get();
 //        System.out.println("ints: "+Arrays.toString(ints));
-        ThreeSum target = new ThreeSumQuadraticWithCalipers(ints);
+        ThreeSum target = new ThreeSumQuadratic(ints);
         Triple[] triplesQuadratic = target.getTriples();
 //        System.out.println("triplesQuadratic:   "+Arrays.toString(triplesQuadratic));
         Triple[] triplesCubic = new ThreeSumCubic(ints).getTriples();

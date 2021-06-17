@@ -1,8 +1,10 @@
 package edu.neu.coe.info6205.threesum;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import edu.neu.coe.info6205.union_find.WQUPC;
+import edu.neu.coe.info6205.util.Benchmark;
+import edu.neu.coe.info6205.util.Benchmark_Timer;
+
+import java.util.*;
 
 /**
  * Implementation of ThreeSum which follows the approach of dividing the solution-space into
@@ -39,9 +41,48 @@ public class ThreeSumQuadratic implements ThreeSum {
     public List<Triple> getTriples(int j) {
         List<Triple> triples = new ArrayList<>();
         // TO BE IMPLEMENTED : implement getTriples
+        Arrays.sort(a); //sort array first
+        for (int i = 0; i < length; i++) { //i will be the first index of triples
+            int start = i + 1; // start will the middle value of triples
+            int end = length - 1; //end will be the last values of triples
+            while (start < end) { //check for array finish
+                if (a[i] + a[start] + a[end] == 0 && ( start==j )) { //checking condition to get sum equal to 0 and j is middle index of triples i.e start variable
+                    triples.add(new Triple(a[i], a[start], a[end])); //add triples to result array
+                    start++;
+                    end--;
+                } else if (a[i] + a[start] + a[end] < 0) { //check for non zero value and move forward
+                    start++;
+                } else {
+                    end--;
+                }
+            }
+        }
         return triples;
     }
 
     private final int[] a;
     private final int length;
+
+    //benchmarking for three_sum_quadratic problem - O(n^2)
+    public static void main(String args[])
+    {
+        for(int i=25;i<=64000;i=i*2) {
+            int sites = i;
+            //benchmarking for random sorted array
+            Benchmark benchmark_threesum = new Benchmark_Timer<>("", b -> {
+                Random random1 = new Random();
+                int[] intArray=new int[sites];
+                for(int z=0;z<sites;z++)
+                {
+                    intArray[z]=random1.nextInt(sites);
+                }
+                ThreeSumQuadratic threeSumQuadratic = new ThreeSumQuadratic(intArray);
+                threeSumQuadratic.getTriples();
+
+            });
+            double result = benchmark_threesum.run(0, 10);
+            System.out.println("three sum quaratic for " + sites + " array length takes " + result + " milliseconds.");
+        }
+    }
+
 }
