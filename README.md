@@ -2,19 +2,29 @@
 This is the class repository for Program Structure and Algorithms
 
 
-Your task is
+There are two parts to this assignment.
 
-Step 1:
+Part 1
 
-(a) Implement height-weighted Quick Union with Path Compression. For this, you will flesh out the class UF_HWQUPC. All you have to do is to fill in the sections marked with // TO BE IMPLEMENTED ... // ...END IMPLEMENTATION.
+If you haven't already, code the quadratic solution of 3-SUM, i.e.
 
-(b) Check that the unit tests for this class all work. You must show "green" test results in your submission (screenshot is OK). 
+ThreeSumQuadratic
 
-Step 2:
+In the repository. Show that the unit tests all pass. And show a graph of your observations (use the Benchmark code) for at least five different (doubling) values of N. If the growth is not O(N^2), please explain why.
 
-Using your implementation of UF_HWQUPC, develop a UF ("union-find") client that takes an integer value n from the command line to determine the number of "sites." Then generates random pairs of integers between 0 and n-1, calling connected() to determine if they are connected and union() if not. Loop until all sites are connected then print the number of connections generated. Package your program as a static method count() that takes n as the argument and returns the number of connections; and a main() that takes n from the command line, calls count() and prints the returned value. If you prefer, you can create a main program that doesn't require any input and runs the experiment for a fixed set of n values. Show evidence of your run(s).
+Points: 25
 
-Step 3:
+Part 2
 
-Determine the relationship between the number of objects (n) and the number of pairs (m) generated to accomplish this (i.e. to reduce the number of components from n to 1). Justify your conclusion in terms of your observations and what you think might be going on.
+We mentioned two alternatives for implementing Union-Find:
 
+For weighted quick union, store the depth rather than the size;
+
+For weighted quick union with path compression, do two loops, so that all intermediate nodes point to the root, not just the alternates.
+For both of these, code the alternative and benchmark it against the implementation in the repository. You have all of that available from a previous assignment.
+
+If you can explain why alternative #1 is unnecessary to be benchmarked, you may skip benchmarking that one.
+
+Points: 35
+
+Usual submission rules apply.
